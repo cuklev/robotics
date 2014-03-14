@@ -199,19 +199,6 @@ int myPID(int setpoint, int position, int *integral, int *previous)
 	return value;
 }
 
-int myPID1(int setpoint, int position, int *integral, int *previous)
-{
-	int proportional=-setpoint+position;
-	*integral+=proportional;
-	if(*integral>2000)*integral=2000;
-	else if(*integral<-2000)*integral=-2000;
-	int value=proportional*1+*integral/10+(proportional-*previous)*10;
-	*previous=proportional;
-	if(value>2000)return 2000;
-	if(value<-2000)return -2000;
-	return value;
-}
-
 int main()
 {
 	unsigned int sensors[5]; // an array to hold sensor values
@@ -232,12 +219,11 @@ int main()
 
 		// The "proportional" term should be 0 when we are on the line.
 
-	//	int power_difference=myPID(-myPID1(0,position,&I2,&L2),position,&I1,&L1);
 		int power_difference=myPID(0,position,&I1,&L1);
 
 		// Compute the actual motor settings.  We never set either motor
 		// to a negative value.
-		const int max = 200;
+		const int max = 100;
 		if(power_difference > max)
 			power_difference = max;
 		if(power_difference < -max)

@@ -5,10 +5,10 @@ DEVICE ?= atmega168
 MCU ?= atmega168
 AVRDUDE_DEVICE ?= m168
 
-CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) $(DEVICE_SPECIFIC_CFLAGS) -Os
+CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) $(DEVICE_SPECIFIC_CFLAGS) -Os -I. -I/home/krisi/Downloads/avr/libpololu-avr
 CC=avr-gcc
 OBJ2HEX=avr-objcopy 
-LDFLAGS=-Wl,-gc-sections -lpololu_$(DEVICE) -Wl,-relax
+LDFLAGS=-Wl,-gc-sections -L. -lpololu_$(DEVICE) -Wl,-relax -L/home/krisi/Downloads/avr/libpololu-avr
 
 PORT ?= /dev/ttyACM0
 AVRDUDE=avrdude
