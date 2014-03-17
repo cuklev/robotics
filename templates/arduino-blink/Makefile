@@ -6,7 +6,8 @@ PROGRAMMER=arduino
 MCU=atmega328p
 CC=avr-gcc
 CXX=avr-g++
-CFLAGS=-c -I./arduino -mmcu=$(MCU) -Os -pipe -fno-strict-aliasing
+F_CPU=16000000
+CFLAGS=-c -I./arduino -mmcu=$(MCU) -O0 -pipe -fno-strict-aliasing -DF_CPU=$(F_CPU)
 OTARGETS=build/$(TARGET).cpp.o \
 build/hooks.c.o \
 build/wiring.c.o \
@@ -15,14 +16,14 @@ build/main.cpp.o
 
 all: build/$(TARGET).obj
 
-build/$(TARGET).obj: $(OTARGETS)
+build/$(TARGET).obj: build/ $(OTARGETS)
 	$(CC) $(OTARGETS) -o $@
 
-build/$(TARGET).cpp.o: $(TARGET).cpp build
+build/$(TARGET).cpp.o: $(TARGET).cpp
 	$(CXX) $(CFLAGS) $< -o $@
-build/%.c.o: arduino/%.c build
+build/%.c.o: arduino/%.c
 	$(CC) $(CFLAGS) $< -o $@
-build/%.cpp.o: arduino/%.cpp build
+build/%.cpp.o: arduino/%.cpp
 	$(CXX) $(CFLAGS) $< -o $@
 
 build/$(TARGET).hex: build/$(TARGET).obj
@@ -30,7 +31,7 @@ build/$(TARGET).hex: build/$(TARGET).obj
 program: build/$(TARGET).hex
 	avrdude -p $(AVRDUDE_DEVICE) -c $(PROGRAMMER) -P $(PORT) -U flash:w:$<
 
-build:
+build/:
 	mkdir build
 clean:
 	rm -rf build/

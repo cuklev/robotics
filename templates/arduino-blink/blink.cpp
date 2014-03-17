@@ -1,17 +1,16 @@
-#define F_CPU 1000000
 #include<Arduino.h>
 
 int led = 13;
 
 void setup() 
 {
-  pinMode(led, OUTPUT);
+	pinMode(led, OUTPUT);
 }
 
 void loop() 
 {
-  digitalWrite(led, HIGH);
-  delay(1000);
-  digitalWrite(led, LOW);
-  delay(1000);
+	digitalWrite(led, HIGH);
+	delay(1000);
+	digitalWrite(led, LOW);
+	delay(1000);
 }

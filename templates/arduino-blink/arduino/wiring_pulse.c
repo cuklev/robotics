@@ -1,5 +1,3 @@
-#define F_CPU 1000000
-
 /*
   wiring_pulse.c - pulseIn() function
   Part of Arduino - http://www.arduino.cc/

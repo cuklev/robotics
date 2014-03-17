@@ -1,5 +1,3 @@
-#define F_CPU 1000000
-
 /*
   wiring.c - Partial implementation of the Wiring API for the ATmega8.
   Part of Arduino - http://www.arduino.cc/

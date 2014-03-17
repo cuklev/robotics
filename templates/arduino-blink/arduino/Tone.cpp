@@ -1,5 +1,3 @@
-#define F_CPU 1000000
-
 /* Tone.cpp
 
   A Tone Generator Library

@@ -1,4 +1,3 @@
-#define F_CPU 1000000
 /*
   HardwareSerial.cpp - Hardware serial library for Wiring
   Copyright (c) 2006 Nicholas Zambetti.  All right reserved.
